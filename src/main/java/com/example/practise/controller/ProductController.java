@@ -1,12 +1,7 @@
 package com.example.practise.controller;
 
-import com.example.practise.service.Product;
-import jakarta.websocket.server.PathParam;
-import org.springframework.stereotype.Controller;
+import com.example.practise.models.Product;
 import org.springframework.web.bind.annotation.*;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController ()
 @RequestMapping("/product")

@@ -1,4 +1,4 @@
-package com.example.practise.service;
+package com.example.practise.models;
 
 
 import lombok.Getter;
