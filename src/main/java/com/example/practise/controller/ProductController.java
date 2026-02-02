@@ -1,11 +1,19 @@
 package com.example.practise.controller;
 
 import com.example.practise.models.Product;
+import com.example.practise.service.FakeStoreProductService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController ()
 @RequestMapping("/product")
 public class ProductController {
+
+    private FakeStoreProductService fsps;
+
+    public ProductController(FakeStoreProductService fsps){
+        this.fsps = fsps;
+    }
 
     @GetMapping(value = "/hello/{name}")
     public String getHello(@PathVariable String name,
@@ -25,6 +33,11 @@ public class ProductController {
         Product p = new Product();
         product.setId(1);
         return p;
+    }
+
+    @GetMapping("/{id}")
+    public Product getSingleProduct(@PathVariable long id){
+        return fsps.getProduct(id);
     }
 
 

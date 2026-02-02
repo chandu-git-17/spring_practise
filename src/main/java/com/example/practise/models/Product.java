@@ -1,6 +1,6 @@
 package com.example.practise.models;
 
-import jdk.jfr.Category;
+import com.example.practise.models.Category;
 import lombok.Getter;
 import lombok.Setter;
 

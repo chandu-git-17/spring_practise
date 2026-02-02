@@ -4,6 +4,6 @@ import com.example.practise.models.Product;
 
 public interface ProductService {
 
-    public Product getProduct();
+    public Product getProduct(long id);
 
 }
