@@ -1,18 +1,22 @@
 package com.example.practise.controller;
 
+import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.models.Product;
 import com.example.practise.service.FakeStoreProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController ()
 @RequestMapping("/product")
 public class ProductController {
 
+    private final RestTemplate restTemplate;
     private FakeStoreProductService fsps;
 
-    public ProductController(FakeStoreProductService fsps){
+    public ProductController(FakeStoreProductService fsps, RestTemplate restTemplate){
         this.fsps = fsps;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping(value = "/hello/{name}")
@@ -28,11 +32,9 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product createProduct (@RequestBody Product product)
+    public Product createProduct (@RequestBody FakeStoreProductDTO fspd)
     {
-        Product p = new Product();
-        product.setId(1);
-        return p;
+        return fsps.createProduct(fspd);
     }
 
     @GetMapping("/{id}")

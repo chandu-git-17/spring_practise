@@ -8,11 +8,6 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class ApplicationConfiguration {
 
-//    private final RestTemplate builder;
-//
-//    public ApplicationConfiguration(RestTemplate builder){
-//        this.builder = builder;
-//    }
 
     @Bean
     public RestTemplate restTemplate(){

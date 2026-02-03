@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Objects;
+
 @Service
 public class FakeStoreProductService implements ProductService{
 
     private final RestTemplate restTemplate;
 
-
-    @Autowired
     public FakeStoreProductService(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
-
 
     private Product convertDTOtoProduct(FakeStoreProductDTO fspd){
         Product product = new Product();
@@ -48,11 +47,11 @@ public class FakeStoreProductService implements ProductService{
         return convertDTOtoProduct(fspd);
     }
 
-//    public Product createProduct(FakeStoreProductDTO fspd){
-//
-//        String url = "https://fakestoreapi.com/products";
-//        FakeStoreProductDTO
-//    }
 
+    public Product createProduct(FakeStoreProductDTO fspd){
+
+        String url = "https://fakestoreapi.com/products";
+        return convertDTOtoProduct(restTemplate.postForObject(url, fspd, FakeStoreProductDTO.class));
+    }
 
 }
