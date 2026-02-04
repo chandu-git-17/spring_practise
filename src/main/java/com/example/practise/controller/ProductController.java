@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController ()
 @RequestMapping("/product")
 public class ProductController {
@@ -42,17 +45,22 @@ public class ProductController {
         return fsps.getProduct(id);
     }
 
+    @GetMapping()
+    private ResponseEntity<List<Product>> getAllProducts(){
+        return fsps.getProducts();
+     }
 
-    @PatchMapping("/{id}")
-    public Product updateProduct(@PathVariable long id , @RequestBody Product product)
-    {
-        return new Product();
-    }
 
     @PutMapping("/{id}")
-    public Product upgradeProduct(@PathVariable long id, @RequestBody Product product){
-        return new Product();
+    public Product updateProduct(@PathVariable long id , @RequestBody FakeStoreProductDTO fsdt)
+    {
+        return fsps.updateProduct(fsdt, id);
     }
+
+//    @PutMapping("/{id}")
+//    public Product upgradeProduct(@PathVariable long id, @RequestBody Product product){
+//        return new Product();
+//    }
 
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable long id){

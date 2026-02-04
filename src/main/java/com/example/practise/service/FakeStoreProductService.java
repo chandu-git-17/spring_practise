@@ -4,9 +4,13 @@ import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.models.Product;
 import com.example.practise.models.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -32,6 +36,14 @@ public class FakeStoreProductService implements ProductService{
         return product;
     }
 
+    private List<Product> convertDTOSToProducts(FakeStoreProductDTO[] dtos){
+        List<Product> products = new ArrayList<>();
+        for(FakeStoreProductDTO dto: dtos){
+            products.add(convertDTOtoProduct(dto));
+        }
+        return products;
+    }
+
 
     public Product getProduct(long id){
 
@@ -51,7 +63,20 @@ public class FakeStoreProductService implements ProductService{
     public Product createProduct(FakeStoreProductDTO fspd){
 
         String url = "https://fakestoreapi.com/products";
-        return convertDTOtoProduct(restTemplate.postForObject(url, fspd, FakeStoreProductDTO.class));
+        return convertDTOtoProduct(Objects.requireNonNull(restTemplate.postForObject(url, fspd, FakeStoreProductDTO.class)));
+    }
+
+    public ResponseEntity<List<Product>> getProducts(){
+        String url = "https://fakestoreapi.com/products";
+        FakeStoreProductDTO[] dtos = restTemplate.getForObject(url, FakeStoreProductDTO[].class);
+        assert dtos != null;
+        ResponseEntity<List<Product>> response  = new ResponseEntity<>(convertDTOSToProducts(dtos), HttpStatus.OK);
+        return response;
+    }
+
+    public Product updateProduct(FakeStoreProductDTO fspd, long id){
+        String url = "https://fakestoreapi.com/products/" + id;
+        return new Product();
     }
 
 }
