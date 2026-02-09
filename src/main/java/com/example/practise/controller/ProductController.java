@@ -3,6 +3,7 @@ package com.example.practise.controller;
 import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.models.Product;
 import com.example.practise.service.FakeStoreProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -10,14 +11,14 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController ()
+@RestController()
 @RequestMapping("/product")
 public class ProductController {
 
     private final RestTemplate restTemplate;
     private FakeStoreProductService fsps;
 
-    public ProductController(FakeStoreProductService fsps, RestTemplate restTemplate){
+    public ProductController(FakeStoreProductService fsps, RestTemplate restTemplate) {
         this.fsps = fsps;
         this.restTemplate = restTemplate;
     }
@@ -28,32 +29,31 @@ public class ProductController {
                            @RequestParam(name = "game", required = false, defaultValue = "") String sport) {
         if (!sport.isEmpty()) {
             return "Hello " + name + " welcome to " + county + " you will be playing " + sport;
-        }
-        else{
+        } else {
             return "Hello " + name + " welcome to " + county;
         }
     }
 
     @PostMapping()
-    public Product createProduct (@RequestBody FakeStoreProductDTO fspd)
-    {
+    public Product createProduct(@RequestBody FakeStoreProductDTO fspd) {
         return fsps.createProduct(fspd);
     }
 
     @GetMapping("/{id}")
-    public Product getSingleProduct(@PathVariable long id){
-        return fsps.getProduct(id);
+    public ResponseEntity<Product> getSingleProduct(@PathVariable long id) {
+        Product product = fsps.getProduct(id);
+        System.out.println(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @GetMapping()
-    private ResponseEntity<List<Product>> getAllProducts(){
+    private ResponseEntity<List<Product>> getAllProducts() {
         return fsps.getProducts();
-     }
+    }
 
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable long id , @RequestBody FakeStoreProductDTO fsdt)
-    {
+    public Product updateProduct(@PathVariable long id, @RequestBody FakeStoreProductDTO fsdt) {
         return fsps.updateProduct(fsdt, id);
     }
 
@@ -63,7 +63,7 @@ public class ProductController {
 //    }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable long id){
+    public void deleteProduct(@PathVariable long id) {
 
     }
 
