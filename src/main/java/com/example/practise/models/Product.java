@@ -1,22 +1,24 @@
 package com.example.practise.models;
 
-import com.example.practise.models.Category;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Product {
+@Entity
+public class Product extends BaseModel{
 
-    private long id;
     private String title;
     private double price;
     private String description;
+    @ManyToOne
     private Category category;
     private String imageURL;
 
-    public Product(long id, String title, double price, String description, Category category, String imageURL){
-        this.id = id;
+    public Product(String title, double price, String description, Category category, String imageURL){
         this.title = title;
         this.price = price;
         this.description = description;
@@ -24,8 +26,8 @@ public class Product {
         this.imageURL = imageURL;
     }
 
-    public Product(){
+
+    public Product() {
 
     }
-
 }

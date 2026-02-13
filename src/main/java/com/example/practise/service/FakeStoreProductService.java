@@ -31,7 +31,6 @@ public class FakeStoreProductService implements ProductService {
         product.setImageURL(fspd.getImage());
         category.setCategoryName(fspd.getCategory());
         product.setCategory(category);
-        category.setId(1);
         return product;
     }
 

@@ -1,18 +1,19 @@
 package com.example.practise.models;
 
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Category {
+@Entity
+public class Category extends BaseModel{
 
-    private int id;
     private String categoryName;
 
-    public Category(int id, String categoryName){
-        this.id = id;
+    public Category(String categoryName){
         this.categoryName = categoryName;
     }
 
