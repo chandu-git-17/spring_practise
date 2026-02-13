@@ -3,6 +3,8 @@ package com.example.practise.controller;
 import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.models.Product;
 import com.example.practise.service.FakeStoreProductService;
+import com.example.practise.service.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +18,9 @@ import java.util.List;
 public class ProductController {
 
     private final RestTemplate restTemplate;
-    private FakeStoreProductService fsps;
+    private ProductService fsps;
 
-    public ProductController(FakeStoreProductService fsps, RestTemplate restTemplate) {
+    public ProductController(@Qualifier("FakeStoreProductService") ProductService fsps, RestTemplate restTemplate) {
         this.fsps = fsps;
         this.restTemplate = restTemplate;
     }

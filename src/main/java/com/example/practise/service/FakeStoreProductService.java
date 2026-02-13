@@ -4,6 +4,7 @@ import com.example.practise.exceptions.ProductNotFoundException;
 import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.models.Product;
 import com.example.practise.models.Category;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
-@Service
+@Service("FakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
     private final RestTemplate restTemplate;
