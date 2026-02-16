@@ -1,6 +1,7 @@
 package com.example.practise.controller;
 
 import com.example.practise.dto.FakeStoreProductDTO;
+import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import com.example.practise.service.FakeStoreProductService;
 import com.example.practise.service.ProductService;
@@ -20,7 +21,7 @@ public class ProductController {
     private final RestTemplate restTemplate;
     private ProductService fsps;
 
-    public ProductController(@Qualifier("FakeStoreProductService") ProductService fsps, RestTemplate restTemplate) {
+    public ProductController(@Qualifier("SelfProductService") ProductService fsps, RestTemplate restTemplate) {
         this.fsps = fsps;
         this.restTemplate = restTemplate;
     }
@@ -44,8 +45,12 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> getSingleProduct(@PathVariable long id) {
         Product product = fsps.getProduct(id);
-        System.out.println(product);
         return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @GetMapping("/category/{id}")
+    public Product getProductByCategory(@PathVariable long id){
+        return fsps.getProductByCategory(id);
     }
 
     @GetMapping()

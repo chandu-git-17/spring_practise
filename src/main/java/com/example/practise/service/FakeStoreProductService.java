@@ -60,6 +60,10 @@ public class FakeStoreProductService implements ProductService {
         return convertDTOtoProduct(Objects.requireNonNull(restTemplate.postForObject(url, fspd, FakeStoreProductDTO.class)));
     }
 
+    public Product getProductByCategory(long id){
+        return new Product();
+    }
+
     public ResponseEntity<List<Product>> getProducts() {
         String url = "https://fakestoreapi.com/products";
         FakeStoreProductDTO[] dtos = restTemplate.getForObject(url, FakeStoreProductDTO[].class);

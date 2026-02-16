@@ -1,6 +1,7 @@
 package com.example.practise.service;
 
 import com.example.practise.dto.FakeStoreProductDTO;
+import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import com.example.practise.repositories.CategoryRepository;
 import com.example.practise.repositories.ProductRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 @Service("SelfProductService")
 public class SelfProductService implements ProductService{
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
     private CategoryRepository categoryRepository;
     public SelfProductService(ProductRepository productRepository, CategoryRepository categoryRepository){
         this.productRepository = productRepository;
@@ -22,7 +23,11 @@ public class SelfProductService implements ProductService{
     }
 
     public Product getProduct(long id){
-        return new Product();
+        return productRepository.findProductByIdIs(id);
+    }
+
+    public Product getProductByCategory(long id){
+        return productRepository.findProductByCategoryId(id);
     }
 
     public ResponseEntity<List<Product>> getProducts(){
