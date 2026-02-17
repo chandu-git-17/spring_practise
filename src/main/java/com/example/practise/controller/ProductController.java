@@ -1,9 +1,11 @@
 package com.example.practise.controller;
 
+import com.example.practise.dto.ClientToProduct;
 import com.example.practise.dto.FakeStoreProductDTO;
+import com.example.practise.dto.ProductByCategoryDTO;
+import com.example.practise.dto.ProductById;
 import com.example.practise.models.Category;
 import com.example.practise.models.Product;
-import com.example.practise.service.FakeStoreProductService;
 import com.example.practise.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -38,23 +40,22 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product createProduct(@RequestBody FakeStoreProductDTO fspd) {
-        return fsps.createProduct(fspd);
+    public Product createProduct(@RequestBody Product product) {
+        return fsps.createProduct(product);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getSingleProduct(@PathVariable long id) {
-        Product product = fsps.getProduct(id);
-        return ResponseEntity.status(HttpStatus.OK).body(product);
+    public ResponseEntity<ProductById> getSingleProduct(@PathVariable long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(fsps.getProduct(id));
     }
 
     @GetMapping("/category/{id}")
-    public Product getProductByCategory(@PathVariable long id){
+    public ProductByCategoryDTO getProductByCategory(@PathVariable long id){
         return fsps.getProductByCategory(id);
     }
 
     @GetMapping()
-    private ResponseEntity<List<Product>> getAllProducts() {
+    private ResponseEntity<List<ProductByCategoryDTO>> getAllProducts() {
         return fsps.getProducts();
     }
 

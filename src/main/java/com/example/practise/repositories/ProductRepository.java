@@ -12,4 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductByCategoryId(Long id);
 
+    Product save(Product product);
 }
