@@ -6,6 +6,8 @@ import com.example.practise.models.Category;
 import com.example.practise.repositories.CategoryRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class SelfCategoryService implements CategoryService{
 
@@ -30,6 +32,10 @@ public class SelfCategoryService implements CategoryService{
     public GetCategoryDTO createCategory(CreateCategoryDTO createCategoryDTO){
         Category category = categoryRepository.save(createCategoryFromDTO(createCategoryDTO));
         return createCategoryResponse(category);
+    }
+
+    public List<Category> getAllCategories(){
+        return categoryRepository.findAll();
     }
 
 }

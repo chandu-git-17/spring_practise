@@ -2,11 +2,11 @@ package com.example.practise.controller;
 
 import com.example.practise.dto.CreateCategoryDTO;
 import com.example.practise.dto.GetCategoryDTO;
+import com.example.practise.models.Category;
 import com.example.practise.service.CategoryService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/category")
@@ -20,6 +20,11 @@ public class CategoryController {
     @PostMapping()
     private GetCategoryDTO createCategory(@RequestBody CreateCategoryDTO createCategoryDTO){
         return categoryService.createCategory(createCategoryDTO);
+    }
+
+    @GetMapping()
+    private List<Category> getAllCategories(){
+        return categoryService.getAllCategories();
     }
 
 }
