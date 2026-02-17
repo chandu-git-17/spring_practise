@@ -15,6 +15,6 @@ public interface ProductService {
     public ProductById getProduct(long id);
     public ProductByCategoryDTO getProductByCategory(long id);
     public ResponseEntity<List<ProductByCategoryDTO>> getProducts();
-    public Product createProduct(Product product);
+    public Product createProduct(ClientToProduct clientToProduct);
     public Product updateProduct(FakeStoreProductDTO fspd, long id);
 }

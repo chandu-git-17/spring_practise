@@ -5,6 +5,7 @@ import com.example.practise.dto.FakeStoreProductDTO;
 import com.example.practise.dto.ProductByCategoryDTO;
 import com.example.practise.dto.ProductById;
 import com.example.practise.exceptions.ProductNotFoundException;
+import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import com.example.practise.repositories.CategoryRepository;
 import com.example.practise.repositories.ProductRepository;
@@ -42,6 +43,19 @@ public class SelfProductService implements ProductService{
     }
 
 
+    private Product createProductFromDTO(ClientToProduct clientToProduct){
+        Product product = new Product();
+        Category category = new Category();
+        category.setId(clientToProduct.getCategoryId());
+        product.setCategory(category);
+        product.setTitle(clientToProduct.getTitle());
+        product.setPrice(clientToProduct.getPrice());
+        product.setDescription(clientToProduct.getDescription());
+        product.setImageURL(clientToProduct.getImageURL());
+        return product;
+    }
+
+
     private ProductByCategoryDTO convertToProductByCategoryDTO(Product product) {
         ProductByCategoryDTO productByCategoryDTO = new ProductByCategoryDTO();
         productByCategoryDTO.setId(product.getId());
@@ -71,8 +85,9 @@ public class SelfProductService implements ProductService{
         return ResponseEntity.ok().body(productByCategoryDTOS);
     }
 
-    public Product createProduct(Product product){
-        return productRepository.save(product);
+    public Product createProduct(ClientToProduct clientToProduct){
+
+        return productRepository.save(createProductFromDTO(clientToProduct));
     }
     public Product updateProduct(FakeStoreProductDTO fspd, long id){
         return new Product();

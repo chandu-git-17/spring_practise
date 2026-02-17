@@ -21,11 +21,13 @@ import java.util.List;
 public class ProductController {
 
     private final RestTemplate restTemplate;
+    private final ProductService productService;
     private ProductService fsps;
 
-    public ProductController(@Qualifier("SelfProductService") ProductService fsps, RestTemplate restTemplate) {
+    public ProductController(@Qualifier("SelfProductService") ProductService fsps, RestTemplate restTemplate, ProductService productService) {
         this.fsps = fsps;
         this.restTemplate = restTemplate;
+        this.productService = productService;
     }
 
     @GetMapping(value = "/hello/{name}")
@@ -40,8 +42,8 @@ public class ProductController {
     }
 
     @PostMapping()
-    public Product createProduct(@RequestBody Product product) {
-        return fsps.createProduct(product);
+    public Product createProductController(@RequestBody ClientToProduct clientToProduct) {
+        return productService.createProduct(clientToProduct);
     }
 
     @GetMapping("/{id}")
