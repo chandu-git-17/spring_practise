@@ -76,17 +76,7 @@ public class Main {
         System.out.println("uppercase string is: " + resultString.describeConstable().stream()
                 .map(String::toUpperCase));
 
-        // Count on condition
-        System.out.println(Arrays.stream(a).filter(x -> x > 2).count());
 
-        //Find second-highest number
-        System.out.println(Arrays.stream(a).distinct().sorted().skip(a.length - 2).findFirst().orElse(0));
-
-        //Find duplicate numbers
-        int[] array = {1,2,2,2,3,4,5,6,6,6};
-        Set<Integer> setArray = new HashSet<>();
-        int[] duplicateArray = Arrays.stream(array).filter(x -> !setArray.add(x)).toArray();
-        System.out.println(Arrays.toString(duplicateArray));
 
     }
 }
