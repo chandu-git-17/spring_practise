@@ -1,4 +1,4 @@
-package practise.lambda;
+package practise.streams;
 
 @FunctionalInterface
 public interface LambdaPractise {
