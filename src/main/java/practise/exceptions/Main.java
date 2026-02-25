@@ -33,5 +33,7 @@ public class Main {
         catch (NullPointerException n){
             System.out.println("Null Pointer Exception");
         }
+
     }
+
 }
