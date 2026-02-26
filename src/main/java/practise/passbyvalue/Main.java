@@ -11,8 +11,8 @@ public class Main {
         System.out.println(a);
     }
     public static void changeNumber(PassByValue pbv){
-        pbv = new PassByValue();
-        pbv.number = 12;
+        //pbv = new PassByValue();
+        pbv.number += 1;
     }
 
     static void printSomething(Long id){
