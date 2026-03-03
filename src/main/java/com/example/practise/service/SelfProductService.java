@@ -19,7 +19,7 @@ import java.util.List;
 public class SelfProductService implements ProductService{
 
     private final ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public SelfProductService(ProductRepository productRepository, CategoryRepository categoryRepository){
         this.productRepository = productRepository;
