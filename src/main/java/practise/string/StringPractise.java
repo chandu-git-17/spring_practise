@@ -19,6 +19,10 @@ public class StringPractise {
         // "==" results in true.
         System.out.println(check3 == check2);
         System.out.println(check1.equals(check2));
+        String nextCheck2 = "check";
+        String nextCheck = new String("check");
+        String nextCheck1 = "check";
+        System.out.println(nextCheck1 == nextCheck);
 
     }
 
