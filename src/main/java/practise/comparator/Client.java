@@ -1,11 +1,11 @@
 package practise.comparator;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Client {
     public static void main(String[] args) {
-        int[] a = {1,2,3};
         List<Integer> list = new ArrayList<>();
         List<Employee> employeeList = new ArrayList<>();
         Employee employee = new Employee();
@@ -19,10 +19,12 @@ public class Client {
         list.add(1);
         list.add(2);
         list.sort(new Compare());
-        employeeList.sort(new EmployeeSalary());
+        Comparator<Employee> comparator = Comparator.comparing(Employee::getSalary).reversed();
+        //employeeList.sort((a, b) -> (-a.getSalary() + b.getSalary()));
+        employeeList.sort(comparator);
         System.out.println(list);
-        for(int i = 0; i < employeeList.size(); i++){
-            System.out.println(employeeList.get(i).getSalary());
+        for(Employee emp: employeeList){
+            System.out.println(emp.getSalary());
         }
     }
 }
