@@ -24,5 +24,4 @@ public class BaseModel {
     private Date createdAt;
     @LastModifiedDate
     private Date updatedAt;
-
 }

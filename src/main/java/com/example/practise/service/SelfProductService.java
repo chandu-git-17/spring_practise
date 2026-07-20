@@ -1,14 +1,12 @@
 package com.example.practise.service;
 
-import com.example.practise.dto.ClientToProduct;
-import com.example.practise.dto.FakeStoreProductDTO;
-import com.example.practise.dto.ProductByCategoryDTO;
-import com.example.practise.dto.ProductById;
+import com.example.practise.dto.*;
 import com.example.practise.exceptions.ProductNotFoundException;
 import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import com.example.practise.repositories.CategoryRepository;
 import com.example.practise.repositories.ProductRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -81,7 +79,6 @@ public class SelfProductService implements ProductService{
         else{
             throw new ProductNotFoundException("Products not found");
         }
-
         return ResponseEntity.ok().body(productByCategoryDTOS);
     }
 
@@ -92,4 +89,25 @@ public class SelfProductService implements ProductService{
     public Product updateProduct(FakeStoreProductDTO fspd, long id){
         return new Product();
     }
+
+
+    public BasicProductListDTO convertHQL(Product product){
+        BasicProductListDTO basicProductListDTO = new BasicProductListDTO();
+        basicProductListDTO.setCategoryName(product.getCategory().getCategoryName());
+        basicProductListDTO.setId(product.getId());
+        basicProductListDTO.setTitle(product.getTitle());
+        return basicProductListDTO;
+    }
+
+    // HQL queries
+    public List<BasicProductListDTO> getAllProducts(){
+
+        List<BasicProductListDTO> getProducts = new ArrayList<>();
+        List<Product> queryResult = productRepository.getAllProducts();
+        for(Product p: queryResult){
+            getProducts.add(convertHQL(p));
+        }
+        return getProducts;
+    }
+
 }

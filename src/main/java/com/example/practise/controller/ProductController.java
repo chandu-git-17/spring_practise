@@ -1,9 +1,6 @@
 package com.example.practise.controller;
 
-import com.example.practise.dto.ClientToProduct;
-import com.example.practise.dto.FakeStoreProductDTO;
-import com.example.practise.dto.ProductByCategoryDTO;
-import com.example.practise.dto.ProductById;
+import com.example.practise.dto.*;
 import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import com.example.practise.service.ProductService;
@@ -22,7 +19,7 @@ public class ProductController {
 
     private final RestTemplate restTemplate;
     private final ProductService productService;
-    private ProductService fsps;
+    private final ProductService fsps;
 
     public ProductController(@Qualifier("SelfProductService") ProductService fsps, RestTemplate restTemplate, ProductService productService) {
         this.fsps = fsps;
@@ -76,6 +73,13 @@ public class ProductController {
     public void deleteProduct(@PathVariable long id) {
 
     }
+
+    //HQL queries
+    @GetMapping("/hql")
+    public List<BasicProductListDTO> getAllProductsHQL(){
+        return productService.getAllProducts();
+    }
+
 
 
 }

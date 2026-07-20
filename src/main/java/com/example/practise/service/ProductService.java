@@ -1,9 +1,6 @@
 package com.example.practise.service;
 
-import com.example.practise.dto.ClientToProduct;
-import com.example.practise.dto.FakeStoreProductDTO;
-import com.example.practise.dto.ProductByCategoryDTO;
-import com.example.practise.dto.ProductById;
+import com.example.practise.dto.*;
 import com.example.practise.models.Category;
 import com.example.practise.models.Product;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +14,5 @@ public interface ProductService {
     public ResponseEntity<List<ProductByCategoryDTO>> getProducts();
     public Product createProduct(ClientToProduct clientToProduct);
     public Product updateProduct(FakeStoreProductDTO fspd, long id);
+    public List<BasicProductListDTO> getAllProducts();
 }
