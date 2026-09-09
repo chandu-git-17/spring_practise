@@ -2,7 +2,7 @@ package practise.multithreading;
 
 public class MyThread implements Runnable{
 
-    Counter counter = new Counter();
+    Counter counter;
     public MyThread(Counter counter){
         this.counter = counter;
     }
